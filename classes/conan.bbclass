@@ -62,13 +62,16 @@ compiler.libcxx=libstdc++11
 build_type=Release
 EOF
     }
-
+    fi
     echo "Using profile:"
     echo ${CONAN_PROFILE_PATH}
     conan profile show ${CONAN_PROFILE_PATH}
 
+    if [ -n "${CONAN_PASSWORD}" ] && [ -n "${CONAN_USER}" ]; then
     conan user -p ${CONAN_PASSWORD} -r ${CONAN_REMOTE_NAME} ${CONAN_USER}
-    conan install ${CONAN_PKG} --remote ${CONAN_REMOTE_NAME} --profile ${CONAN_PROFILE_PATH} -if ${D}
+    fi
+    
+    conan install ${CONAN_PKG} --update --remote ${CONAN_REMOTE_NAME} --profile ${CONAN_PROFILE_PATH} -if ${D}
     rm -f ${D}/deploy_manifest.txt
 }
 
