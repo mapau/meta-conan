@@ -12,7 +12,7 @@ CONAN_REMOTE_URL ?= ""
 CONAN_REMOTE_NAME ?= "conan-yocto"
 CONAN_PROFILE_PATH ?= "${WORKDIR}/profiles/meta-conan_deploy"
 CONAN_CONFIG_URL ?= ""
-
+CONAN_VERIFY_SSL ?= "true"
 
 conan_do_compile() {
  :
