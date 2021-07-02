@@ -41,12 +41,11 @@ conan_do_install() {
         echo ${CONAN_CONFIG_URL}
         conan config install ${CONAN_CONFIG_URL}
     fi
-    if [ ${CONAN_REMOTE_URL} ]; then
+    elif [ -n "${CONAN_REMOTE_NAME}" ] && [ -n "${CONAN_REMOTE_URL}" ]; then
         echo "Configuring the Conan remote:"
-        echo ${CONAN_REMOTE_URL}
-        conan remote add ${CONAN_REMOTE_NAME} ${CONAN_REMOTE_URL}
+        echo ${CONAN_REMOTE_NAME} ${CONAN_REMOTE_URL} ${CONAN_VERIFY_SSL}
+        conan remote add ${CONAN_REMOTE_NAME} ${CONAN_REMOTE_URL} ${CONAN_VERIFY_SSL}
     fi
-
     mkdir -p ${WORKDIR}/profiles
     ${CC} -dumpfullversion | {
     IFS=. read major minor patch
